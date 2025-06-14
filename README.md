@@ -9,4 +9,4 @@ Repositorio para alojar el trabajo integrador de la materia Matematicas, de la U
 ## Materia
 - Matemáticas
 ## Link del video:
-- 
+- https://youtu.be/Sqwz312v7Uo?si=U0ItJU1J2OcLQvaw
