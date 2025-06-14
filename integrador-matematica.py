@@ -1,4 +1,4 @@
-##### A) OPERACIONES CON DNIs - -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -
+# A) OPERACIONES CON DNIs - -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -
 separador = "-"*50
 #Se usa para calcular fechas y horas actuales. clase importada de datatime
 #Es par calcular las edades de los DNIs
@@ -7,14 +7,16 @@ from datetime import datetime
 from itertools import product
 
 
-## 1    Ingreso de los DNIs (reales o ficticios).
+# 1) INGRESO DE LOS DNIs (REALES O FICTICIOS).
+
 dnis = [
     "77455677", #CONJUNTO A
     "40666027" # CONJUNTO B
 ]
 
 
-## 2        Generación automática de los conjuntos de dígitos únicos.
+# 2) GENERACION AUTOMATICA DE LOS CONJUNTOS DE DIGITOS UNICOS.
+
 conjunto_digitos = [set(dni) for dni in dnis]
 def conj_digitos():
     print("CONJUNTO DE DÍGITOS ÚNICOS:\n")
@@ -22,15 +24,16 @@ def conj_digitos():
         print(f"- DNI {i+1}:{conjunto}") # imprime el conjunto de dígitos únicos
 
 
-## 3        Cálculo y visualización de:
-##          unión, intersección, diferencia y diferencia simétrica
+# 3) CALCULO Y VISUALIZACION DE:
+#          unión, intersección, diferencia y diferencia simétrica
 union = set.union(*conjunto_digitos) #se usa para calcular la unión de los conjuntos de dígitos únicos
 interseccion = set.intersection(*conjunto_digitos) #se usa para calcular la interseccion de dos conjuntos
 diferencia = conjunto_digitos[0] - conjunto_digitos[1]  
 diferencia_simetrica = set.symmetric_difference(conjunto_digitos[0],conjunto_digitos[1])
 
 
-## 4           Frecuencia de digitos
+# 4) FRECUENCIA DE DIGITOS.
+
 def frecuencia_digitos():
     for i, dni in enumerate(dnis):
         frecuencia = {}
@@ -39,14 +42,15 @@ def frecuencia_digitos():
         print(f"- DNI {i+1} ({dni}) :{frecuencia}")
 
 
-##  5       Suma total de los dígitos de cada DNI.
+# 5) SUMA TOTAL DE LOS DIGITOS DE CADA DNI.
+
 def suma_digitos():
     for i, dni in enumerate(dnis):
         suma = sum(int(d) for d in dni)
         print(f"- DNI {i+1}: {suma}")
 
 
-## 6 Evaluacion de condiciones lógicas
+# 6) EVALUACION DE CONDICIONES LOGICAS.
 
 print(separador)
 print("-----EVALUACIÓN DE CONDICIONES LÓGICAS-----")
@@ -97,6 +101,7 @@ else:
     print("Grupo impar o balanceado")
 
 #---------------------------------------------------------------------------------
+
 # El siguiente condicional verifica si ningun conjunto contiene el digito "0"
 if all("0" not in conj for conj in conjunto_digitos):
 # En caso de que ninguno lo tenga muestra "Grupo sin ceros"
@@ -106,76 +111,52 @@ else:
     print("Al menos un conjunto contiene el dígito 0")
 dnis = ["77455677", "40666027"]
 
+#---------------------------------------------------------------------------------
 
-    
+# B) OPERACIONES CON A Operaciones con años de nacimiento.   
 
-# B) Operaciones con años de nacimiento -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   
+# Se crea una lista con los años de nacimiento de cada individuo.
+años = [1998, 1984]
 
+#---------------------------------------------------------------------------------
 
-anios = [1998,1984]
-
-
-# Funcion para determinar cuantos años son impares y cuantos pares.
-
-
-def par_imp():
-    impares = 0
+# Funcion para determinar cuantos años son pares y cuantos impares.
+def contar_pares_impares(lista_años):
+    # Inicio de contadores para los años pares e impares.
     pares = 0
-    for anio in anios: 
-        if anio % 2 == 0 : #si el año al dividirlo por dos, da resto 0, es par
-            pares += 1
-        else : # como no da cero, lo toma como año impar
+    impares = 0
+    for año in lista_años: 
+        if año % 2 == 0 :
+            pares +=1
+        else :
             impares +=1
-    print(f"El total de años pares es: {pares}\n El total de años impares es: {impares}")
 
+#---------------------------------------------------------------------------------
 
-#Funcion para saber si un año es bisiesto
-def es_bisiesto(anio):
-    return(anio%4 == 0 and anio%100 != 0) or (anio%400 == 0)
+# Esta funcion corrobora si el año es bisiesto.
+def es_bisiesto(año):
+    return(año%4 == 0 and año%100 != 0) or (año%400 == 0)
 
-def print_bi():
-    if any(es_bisiesto(anio) for anio in anios): # si alguno de los dos años es biciesto, se imprime:
+#---------------------------------------------------------------------------------
+
+# Funcion que verifica si hay por lo menos un año bisiesto en la lista de años e imprime un mensaje segun que.
+def verificar_años_bisiestos(lista_años):
+    if any(es_bisiesto(año) for año in lista_años):
         print("Tenemos un año especial")
-    else: # si ninguno es biciesto, imprime:
+    else:
         print("no tenemos ningún año bisiesto")
 
+#---------------------------------------------------------------------------------
 
-#  Funcion para los que nacieron después del 2000, mostrar "Grupo Z".
-def grupoZ():
-    if anios[0] > 2000 and anios[1] > 2000: # si ambos años son mayores a 2000, imprime:
-       print("Grupo Z")
-    else: # si no se cumple la condicion de arriba, imprime:
-        print("Hay aunque sea un año que no es GRUPO Z")
+# Este condicional verifica si todos los años en la lista son mayores a los 2000, se identifica como "Grupo Z"
+def verificar_grupo_z(lista_años):
+    if all(año > 2000 for año in lista_años):
+        print("GRUPO Z")
 
-# producto cartesiano entre el conjunto de años y el conjunto de edades actuales.
+#---------------------------------------------------------------------------------
 
-from datetime import datetime # importa una clase de un módulo de python
-anio_actual = datetime.now().year #pedimos el año actual
-
-
-def edades_():
-    edades = []
-    for anio in anios: #recorre los años
-        edad = anio_actual - anio # calcula la edad
-        edades.append(edad) # lo agrega a edades
-    return edades
-
-edades = edades_()
-producto_cartesiano = []
-
-def productos_cart():
-
-    for anio in anios: # recorre los años
-        for edad in edades: #recorre las edades
-            producto_cartesiano.append((anio,edad)) # agrega a la lista de los productos: (anio, edad)
-
-    for num in producto_cartesiano:
-        print(num)
-
-
-
-
-
+verificar_años_bisiestos(años)
+verificar_grupo_z(años)
 
 
 print(separador)
@@ -202,23 +183,10 @@ print(separador)
 print("SUMA TOTAL DE LOS DIGITOS DE CADA DNI:\n")
 suma_digitos()
 
-
+print(separador)
+print("-----Operaciones con años de nacimiento-----")
 print(separador)
 
-print("--------OPERACIONES CON AÑOS DE NACIMIENTO--------")
-print(separador)
-
-
-print("EJERCICIO -CUANTOS AÑOS NACIERON EN PARES Y CUANTOS EN IMPARES\n")
-par_imp()
-print(separador)
-print("EJERCICIO -HAY ALGUN AÑO BISISETO?-\n")
-print_bi()
-print(separador)
-print("EJECICIO -GRUPO Z-\n")
-grupoZ()
-print(separador)
-print("EJERCICIO -PRODUCTOS CARTESIANOS-\n")
-productos_cart()
+print(f"Años pares: {pares}, Años impares: {impares}")
 
 print(separador)
