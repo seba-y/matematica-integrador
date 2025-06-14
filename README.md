@@ -8,3 +8,5 @@ Repositorio para alojar el trabajo integrador de la materia Matematicas, de la U
 ## Comision 9
 ## Materia
 - Matemáticas
+## Link del video:
+- 
